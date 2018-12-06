@@ -31,6 +31,11 @@ public class ItemController {
 
 	@Resource
 	ImageUploadService uploader;
+	
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
 
 	@RequestMapping("/item")
 	public String findOneItem(@RequestParam(value = "id") long itemId, Model model) throws ItemNotFoundException {
@@ -41,6 +46,15 @@ public class ItemController {
 		}
 		throw new ItemNotFoundException();
 	}
+	
+	
+	@RequestMapping("/")
+	public String home(Model model) {
+		model.addAttribute("itemsModel", itemRepo.findAll());
+		return "items";
+
+	}
+	
 
 	@RequestMapping("/items")
 	public String findAllItems(Model model) {
