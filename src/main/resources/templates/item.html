@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:text= "${itemModel.itemName}"></title>
+	<link rel="stylesheet" type="text/css" href="/css/layout.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+</head>
+<body>
+	<main id="container">
+		<header th:replace="layouts/header :: header"></header>
+
+		<div class="items">
+			<section>
+				<p th:text = "${itemModel.itemName}"/>
+				<img id="shoeImage" th:src = "${itemModel.imageUrl}"/>
+				<p id="description" th:text = "${itemModel.itemDescription}"/>
+			</section>
+		</div>
+		
+		<form class= "add" method="Post">
+			<input name="id" type="hidden" th:value="${itemModel.id}" />
+			<button class="icon" th:formaction="@{/add-item-to-cart}"><img src="/images/cart.png"></img></button>
+		</form>
+		
+		
+		<footer th:replace="layouts/footer :: footer">&copy; </footer>
+	</main>
+</body>
+	
+</html>

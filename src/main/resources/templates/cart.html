@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Cart</title>
+	<link rel="stylesheet" type="text/css" href="/css/layout.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+</head>
+<body>
+	<main id="container">
+		<header th:replace="layouts/header :: header"></header>
+
+		<h3>Shopping List</h3>
+
+  		<div class="items" th:each="cart: ${cartModel}">
+  			<ul>
+      			<li><a th:href ="@{/item(id=${cart.item.id})}" th:text = "${cart.item.itemName}"></a></li>
+    		</ul>
+  		</div>
+		
+		<footer th:replace="layouts/footer :: footer">&copy; </footer>
+	</main>
+</body>
+	
+</html>
+
+
+
+
+  
+ 
