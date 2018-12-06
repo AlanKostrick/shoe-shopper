@@ -11,11 +11,27 @@
 }
 
 .nav {
+	align-items: center;
 	display: flex;
 	justify-content: space-around;
-	width: 200px;
+	width: 250px;
 }
 
+.welcome{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#login{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 2rem auto;
+   	padding: 0;
+}
 
 .items section{
 	align-items: center;

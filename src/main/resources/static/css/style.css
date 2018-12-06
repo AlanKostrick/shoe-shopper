@@ -32,9 +32,19 @@
 	font-size: 14px;
 }
 
+.formText{
+	color: #FFF;
+	font-family: 'Lato', sans-serif;
+	font-size: 14px;
+}
+
 #shoppingcart{
 	border-radius: 50%;
 	height: 30px;
+}
+
+.welcome{
+	font-size: 15px;
 }
 
 .items{
@@ -101,8 +111,13 @@
 	-webkit-transform: scale(1);
     transform: scale(1);
     opacity: 1;
-    
-	
+}
+
+#login{
+	background-color: #150FB3;
+	border-radius: 12px;
+	box-shadow: -2px 6px 34px -1px rgba(0,0,0,0.75);
+	width: 60%;
 }
 
 .add{
