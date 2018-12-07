@@ -1,5 +1,6 @@
 package org.wecancodeit.shopper;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +19,7 @@ import org.wecancodeit.shopper.controllers.CartItemController;
 import org.wecancodeit.shopper.models.CartItem;
 import org.wecancodeit.shopper.models.Item;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
+import org.wecancodeit.shopper.repositories.ItemRepository;
 
 public class CartItemControllerTest {
 
@@ -30,8 +32,12 @@ public class CartItemControllerTest {
 	@Mock
 	private CartItem cartItemTwo;
 	
+	
 	@Mock
 	private CartItemRepository cartItemRepo;
+	
+	@Mock
+	private ItemRepository itemRepo;
 	
 	@Mock
 	private Model model;
@@ -49,19 +55,5 @@ public class CartItemControllerTest {
 		verify(model).addAttribute("cartItemsModel", cartItems);
 	}
 	
-	@Test
-	public void shouldAddAdditionalCartItemsToModel() throws Exception {
-		Item itemToAdd = new Item("new item name", "", "");
-		CartItem cartItem = new CartItem(itemToAdd);
-		Long id = cartItem.getId();
-		Optional<CartItem> added = cartItemRepo.findById(id);
-		added.get();
-		System.out.println(added);
-		underTest.addItemsToCartFromItemPage(id);
-
-		ArgumentCaptor<CartItem> itemArgument = ArgumentCaptor.forClass(CartItem.class);
-		verify(cartItemRepo).save(itemArgument.capture());
-		//assertEquals("new item name", itemArgument.getValue().getItem().getItemName());
-	}
 
 }
