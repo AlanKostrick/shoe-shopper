@@ -6,32 +6,32 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Cart {
-	
+public class CartItem {
+
 	@Id
 	@GeneratedValue
 	private long id;
-	
+
 	@ManyToOne
 	private Item item;
-	
-	public Cart() {
-		
+
+	public CartItem() {
+
 	}
 
-	public Cart(Item item) {
+	public CartItem(Item item) {
 		this.item = item;
 	}
 
 	public long getId() {
-		
+
 		return id;
 	}
 
 	public Item getItem() {
-		
+
 		return item;
 	}
+	
 
 }
- 
