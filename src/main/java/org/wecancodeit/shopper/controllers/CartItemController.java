@@ -17,14 +17,14 @@ import org.wecancodeit.shopper.repositories.ItemRepository;
 public class CartItemController {
 
 	@Resource
-	private CartItemRepository cartRepo;
+	private CartItemRepository cartItemRepo;
 
 	@Resource
 	private ItemRepository itemRepo;
 
 	@RequestMapping("/cart")
 	public String findAllCartItems(Model model) {
-		model.addAttribute("cartItemModel", cartRepo.findAll());
+		model.addAttribute("cartItemsModel", cartItemRepo.findAll());
 		return "cart";
 	}
 
@@ -35,7 +35,7 @@ public class CartItemController {
 		Item item = itemResult.get();
 		CartItem lineItem;
 
-		Optional<CartItem> foundItem = cartRepo.findByItem(item);
+		Optional<CartItem> foundItem = cartItemRepo.findByItem(item);
 
 		if (foundItem.isPresent()) {
 			lineItem = foundItem.get();
@@ -43,8 +43,20 @@ public class CartItemController {
 			lineItem = new CartItem(item);
 		}
 
-		cartRepo.save(lineItem);
+		cartItemRepo.save(lineItem);
 
+		return "redirect:/cart";
+	}
+
+	@RequestMapping("/delete-all")
+	public String deleteAllItems() {
+		cartItemRepo.deleteAll();
+		return "redirect:/cart";
+	}
+	
+	@RequestMapping("/place-order")
+	public String orderItems() {
+		cartItemRepo.deleteAll();
 		return "redirect:/cart";
 	}
 

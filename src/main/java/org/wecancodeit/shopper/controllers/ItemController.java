@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.wecancodeit.shopper.models.Item;
 import org.wecancodeit.shopper.models.ItemNotFoundException;
+import org.wecancodeit.shopper.repositories.CartItemRepository;
 import org.wecancodeit.shopper.repositories.ItemRepository;
 import org.wecancodeit.shopper.repositories.UserRepository;
 
@@ -36,8 +37,12 @@ public class ItemController {
 	@Resource
 	private UserRepository userRepo;
 	
+	@Resource
+	private CartItemRepository cartItemRepo;
+	
 	@RequestMapping("/login")
 	public String login() {
+		cartItemRepo.deleteAll();
 		return "login";
 	}
 
@@ -70,7 +75,7 @@ public class ItemController {
 
 	@PostMapping("/add-item")
 	public String addItemWithImage(@RequestParam(value = "itemName", required = true) String itemName, @RequestParam(value = "itemDescription", required = true) String itemDescription,
-			@RequestParam("imageFile") MultipartFile imageFile) throws Exception {
+			@RequestParam(value = "imageFile", required= false) MultipartFile imageFile) throws Exception {
 
 		String virtualFileUrl = uploader.uploadMultipartFile(imageFile);
 		System.out.println(itemName);

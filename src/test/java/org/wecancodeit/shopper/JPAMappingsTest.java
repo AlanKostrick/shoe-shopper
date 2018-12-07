@@ -16,8 +16,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.wecancodeit.shopper.models.CartItem;
 import org.wecancodeit.shopper.models.Item;
+import org.wecancodeit.shopper.models.User;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
 import org.wecancodeit.shopper.repositories.ItemRepository;
+import org.wecancodeit.shopper.repositories.UserRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
@@ -31,6 +33,9 @@ public class JPAMappingsTest {
 
 	@Resource
 	private CartItemRepository cartRepo;
+
+	@Resource
+	private UserRepository userRepo;
 
 	@Test
 	public void shouldSaveAndLoadAnItem() {
@@ -75,6 +80,23 @@ public class JPAMappingsTest {
 		cart = result.get();
 
 		assertThat(cart.getItem().getItemName(), is("Item Name"));
+		assertTrue(result.isPresent());
+	}
+
+	@Test
+	public void shouldSaveAndLoadUser() {
+		User adminUser = new User("admin", "admin", "ADMIN");
+		userRepo.save(adminUser);
+		
+		long userId = adminUser.getId();
+
+		entityManager.flush();
+		entityManager.clear();
+
+		Optional<User> result = userRepo.findById(userId);
+		adminUser = result.get();
+
+		assertThat(adminUser.getUsername(), is("admin"));
 		assertTrue(result.isPresent());
 	}
 

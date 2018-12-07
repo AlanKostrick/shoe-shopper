@@ -39,6 +39,7 @@ public class ItemControllerTest {
 	@Mock
 	private Model model;
 
+	@Mock
 	private MockMultipartFile imageFile;
 
 	@Before
