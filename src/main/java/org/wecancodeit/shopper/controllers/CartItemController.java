@@ -24,7 +24,7 @@ public class CartItemController {
 
 	@RequestMapping("/cart")
 	public String findAllCartItems(Model model) {
-		model.addAttribute("cartItemModel", cartRepo.findAll());
+		model.addAttribute("cartItemsModel", cartRepo.findAll());
 		return "cart";
 	}
 
