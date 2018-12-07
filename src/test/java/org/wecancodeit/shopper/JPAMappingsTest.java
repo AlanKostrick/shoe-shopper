@@ -14,9 +14,9 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.wecancodeit.shopper.models.Cart;
+import org.wecancodeit.shopper.models.CartItem;
 import org.wecancodeit.shopper.models.Item;
-import org.wecancodeit.shopper.repositories.CartRepository;
+import org.wecancodeit.shopper.repositories.CartItemRepository;
 import org.wecancodeit.shopper.repositories.ItemRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,7 +30,7 @@ public class JPAMappingsTest {
 	private ItemRepository itemRepo;
 
 	@Resource
-	private CartRepository cartRepo;
+	private CartItemRepository cartRepo;
 
 	@Test
 	public void shouldSaveAndLoadAnItem() {
@@ -63,7 +63,7 @@ public class JPAMappingsTest {
 		Item item = new Item("Item Name", "", "");
 		itemRepo.save(item);
 
-		Cart cart = new Cart(item);
+		CartItem cart = new CartItem(item);
 		cartRepo.save(cart);
 
 		long cartId = cart.getId();
@@ -71,7 +71,7 @@ public class JPAMappingsTest {
 		entityManager.flush();
 		entityManager.clear();
 
-		Optional<Cart> result = cartRepo.findById(cartId);
+		Optional<CartItem> result = cartRepo.findById(cartId);
 		cart = result.get();
 
 		assertThat(cart.getItem().getItemName(), is("Item Name"));

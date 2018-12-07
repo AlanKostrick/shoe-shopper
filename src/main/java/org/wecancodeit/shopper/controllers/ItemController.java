@@ -22,15 +22,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wecancodeit.shopper.models.Item;
 import org.wecancodeit.shopper.models.ItemNotFoundException;
 import org.wecancodeit.shopper.repositories.ItemRepository;
+import org.wecancodeit.shopper.repositories.UserRepository;
 
 @Controller
 public class ItemController {
 
 	@Resource
-	ItemRepository itemRepo;
+	private ItemRepository itemRepo;
 
 	@Resource
-	ImageUploadService uploader;
+	private ImageUploadService uploader;
+	
+	@Resource
+	private UserRepository userRepo;
 	
 	@RequestMapping("/login")
 	public String login() {
@@ -39,6 +43,7 @@ public class ItemController {
 
 	@RequestMapping("/item")
 	public String findOneItem(@RequestParam(value = "id") long itemId, Model model) throws ItemNotFoundException {
+		
 		Optional<Item> foundItem = itemRepo.findById(itemId);
 		if (foundItem.isPresent()) {
 			model.addAttribute("itemModel", foundItem.get());
@@ -52,7 +57,6 @@ public class ItemController {
 	public String home(Model model) {
 		model.addAttribute("itemsModel", itemRepo.findAll());
 		return "items";
-
 	}
 	
 

@@ -11,9 +11,9 @@
 
 		<h3>Shopping List</h3>
 
-  		<div class="items" th:each="cart: ${cartModel}">
+  		<div class="items" th:each="cartItem: ${cartItemModel}">
   			<ul>
-      			<li><a th:href ="@{/item(id=${cart.item.id})}" th:text = "${cart.item.itemName}"></a></li>
+      			<li><a th:href ="@{/item(id=${cartItem.item.id})}" th:text = "${cartItem.item.itemName}"></a></li>
     		</ul>
   		</div>
 		
