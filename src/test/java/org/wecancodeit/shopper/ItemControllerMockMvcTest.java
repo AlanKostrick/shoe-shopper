@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
 import org.wecancodeit.shopper.controllers.ImageUploadService;
 import org.wecancodeit.shopper.controllers.ItemController;
-import org.wecancodeit.shopper.models.Item;
+import org.wecancodeit.shopper.models.Product;
 import org.wecancodeit.shopper.repositories.ItemRepository;
 import org.wecancodeit.shopper.repositories.UserRepository;
 
@@ -42,11 +42,11 @@ public class ItemControllerMockMvcTest {
 	private UserRepository userRepo;
 
 	@Mock
-	private Item itemOne;
+	private Product itemOne;
 	Long itemOneId = 1L;
 
 	@Mock
-	private Item itemTwo;
+	private Product itemTwo;
 
 	@Mock
 	private Model model;

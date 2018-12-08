@@ -12,10 +12,10 @@
 
 		<h3>Checkout</h3>
 
-  		<div class="items" th:each="cartItem: ${cartItemsModel}">
-  			<ul>
-      			<li><a th:href ="@{/item(id=${cartItem.item.id})}" th:text = "${cartItem.item.itemName}"></a></li>
-    		</ul>
+  		<div class="items" th:each="cartItem: ${userModel.cartItems}">
+  		 	<ul>
+      			<li><a th:href ="@{/product(id=${cartItem.product.id})}" th:text = "${cartItem.product.productName}"></a></li>
+    		</ul> 
   		</div>
   		
   		<div class="checkout">

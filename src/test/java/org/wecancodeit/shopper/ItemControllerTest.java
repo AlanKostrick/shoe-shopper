@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.ui.Model;
 import org.wecancodeit.shopper.controllers.ItemController;
-import org.wecancodeit.shopper.models.Item;
+import org.wecancodeit.shopper.models.Product;
 import org.wecancodeit.shopper.models.ItemNotFoundException;
 import org.wecancodeit.shopper.repositories.ItemRepository;
 
@@ -27,11 +27,11 @@ public class ItemControllerTest {
 	private ItemController underTest;
 
 	@Mock
-	private Item itemOne;
+	private Product itemOne;
 	private Long itemOneId = 1L;
 
 	@Mock
-	private Item itemTwo;
+	private Product itemTwo;
 
 	@Mock
 	private ItemRepository itemRepo;
@@ -56,7 +56,7 @@ public class ItemControllerTest {
 
 	@Test
 	public void shouldAddAllItemsToModel() {
-		List<Item> allItems = Arrays.asList(itemOne, itemTwo);
+		List<Product> allItems = Arrays.asList(itemOne, itemTwo);
 		when(itemRepo.findAll()).thenReturn(allItems);
 		underTest.findAllItems(model);
 		verify(model).addAttribute("itemsModel", allItems);
@@ -66,7 +66,7 @@ public class ItemControllerTest {
 	public void shouldAddAdditionalItemsToModel() throws Exception {
 		underTest.addItemWithImage("new item name", "", imageFile);
 
-		ArgumentCaptor<Item> itemArgument = ArgumentCaptor.forClass(Item.class);
+		ArgumentCaptor<Product> itemArgument = ArgumentCaptor.forClass(Product.class);
 		verify(itemRepo).save(itemArgument.capture());
 		assertEquals("new item name", itemArgument.getValue().getItemName());
 	}

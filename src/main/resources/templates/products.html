@@ -15,21 +15,21 @@
 	
 	
 		<div class="items">
-			<section th:each = "item: ${itemsModel}">
-				<a th:href ="@{/item(id=${item.id})}" th:text = "${item.itemName}"></a>
+			<section th:each = "product: ${productsModel}">
+				<a th:href ="@{/product(id=${product.id})}" th:text = "${product.productName}"></a>
 			</section>
 		</div>
 	
 	
 		
 		<div class="add">
-			<form class="hide" th:action="@{/add-item}" method="POST" enctype="multipart/form-data">
+			<form class="hide" th:action="@{/add-product}" method="POST" enctype="multipart/form-data">
 				<section>
-					<input class="itemNameInput" type="text" name="itemName" placeholder="Item Name" />
+					<input class="itemNameInput" type="text" name="productName" placeholder="Item Name" />
 				</section>
 				
 				<section>
-					<input class="itemNameInput" type="text" name="itemDescription" placeholder="Item Description" />
+					<input class="itemNameInput" type="text" name="productDescription" placeholder="Item Description" />
 				</section>
 		
 				<section>

@@ -17,7 +17,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 import org.wecancodeit.shopper.controllers.CartItemController;
 import org.wecancodeit.shopper.models.CartItem;
-import org.wecancodeit.shopper.models.Item;
+import org.wecancodeit.shopper.models.Product;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
 import org.wecancodeit.shopper.repositories.ItemRepository;
 

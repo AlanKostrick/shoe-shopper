@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @SuppressWarnings("serial")
-@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Item Not Found")
-public class ItemNotFoundException extends Exception {
+@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "Product Not Found")
+public class ProductNotFoundException extends Exception {
 
 }

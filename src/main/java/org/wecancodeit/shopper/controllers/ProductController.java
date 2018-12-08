@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -19,69 +20,70 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.wecancodeit.shopper.models.Item;
-import org.wecancodeit.shopper.models.ItemNotFoundException;
-import org.wecancodeit.shopper.repositories.CartItemRepository;
-import org.wecancodeit.shopper.repositories.ItemRepository;
+import org.wecancodeit.shopper.models.Product;
+import org.wecancodeit.shopper.models.ProductNotFoundException;
+import org.wecancodeit.shopper.models.User;
+import org.wecancodeit.shopper.repositories.ProductRepository;
 import org.wecancodeit.shopper.repositories.UserRepository;
 
 @Controller
-public class ItemController {
+public class ProductController {
 
 	@Resource
-	private ItemRepository itemRepo;
+	private ProductRepository productRepo;
 
 	@Resource
 	private ImageUploadService uploader;
-	
+
 	@Resource
 	private UserRepository userRepo;
-	
-	@Resource
-	private CartItemRepository cartItemRepo;
-	
+
 	@RequestMapping("/login")
 	public String login() {
-		cartItemRepo.deleteAll();
+		// cartItemRepo.deleteAll();
 		return "login";
 	}
 
-	@RequestMapping("/item")
-	public String findOneItem(@RequestParam(value = "id") long itemId, Model model) throws ItemNotFoundException {
-		
-		Optional<Item> foundItem = itemRepo.findById(itemId);
-		if (foundItem.isPresent()) {
-			model.addAttribute("itemModel", foundItem.get());
-			return "item";
+	@RequestMapping("/product")
+	public String findOneItem(@RequestParam(value = "id") long productId, Principal principal, Model model)
+			throws ProductNotFoundException {
+
+		String loggedUser = principal.getName().toString();
+		Optional<User> foundUser = userRepo.findByUsername(loggedUser);
+
+		Optional<Product> foundProduct = productRepo.findById(productId);
+
+		if (foundProduct.isPresent()) {
+			model.addAttribute("productModel", foundProduct.get());
+			model.addAttribute("userModel", foundUser.get());
+			return "product";
 		}
-		throw new ItemNotFoundException();
+		throw new ProductNotFoundException();
 	}
-	
-	
+
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("itemsModel", itemRepo.findAll());
-		return "items";
+		model.addAttribute("productsModel", productRepo.findAll());
+		return "products";
 	}
-	
 
-	@RequestMapping("/items")
+	@RequestMapping("/products")
 	public String findAllItems(Model model) {
-		model.addAttribute("itemsModel", itemRepo.findAll());
-		return "items";
+		model.addAttribute("productsModel", productRepo.findAll());
+		return "products";
 
 	}
 
-
-	@PostMapping("/add-item")
-	public String addItemWithImage(@RequestParam(value = "itemName", required = true) String itemName, @RequestParam(value = "itemDescription", required = true) String itemDescription,
-			@RequestParam(value = "imageFile", required= false) MultipartFile imageFile) throws Exception {
+	@PostMapping("/add-product")
+	public String addItemWithImage(@RequestParam(value = "productName", required = true) String productName,
+			@RequestParam(value = "productDescription", required = true) String productDescription,
+			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile) throws Exception {
 
 		String virtualFileUrl = uploader.uploadMultipartFile(imageFile);
-		System.out.println(itemName);
-		itemRepo.save(new Item(itemName, itemDescription, "/uploads/" + virtualFileUrl));
+		System.out.println(productName);
+		productRepo.save(new Product(productName, productDescription, "/uploads/" + virtualFileUrl));
 
-		return "redirect:/items";
+		return "redirect:/products";
 	}
 
 	@GetMapping("/uploads/{file:.+}") // allows "." to be part of PathVariable instead of truncating it
