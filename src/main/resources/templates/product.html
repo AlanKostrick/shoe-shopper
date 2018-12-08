@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title th:text= "${itemModel.itemName}"></title>
+	<title th:text= "${productModel.productName}"></title>
 	<link rel="stylesheet" type="text/css" href="/css/layout.css"></link>
 	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 </head>
@@ -11,15 +11,16 @@
 
 		<div class="items">
 			<section>
-				<p th:text = "${itemModel.itemName}"/>
-				<img id="shoeImage" th:src = "${itemModel.imageUrl}"/>
-				<p id="description" th:text = "${itemModel.itemDescription}"/>
+				<p th:text = "${productModel.productName}"/>
+				<img id="shoeImage" th:src = "${productModel.imageUrl}"/>
+				<p id="description" th:text = "${productModel.productDescription}"/>
 			</section>
 		</div>
 		
 		<form class= "add" method="Post">
-			<input name="id" type="hidden" th:value="${itemModel.id}" />
-			<button class="icon" th:formaction="@{/add-item-to-cart}"><img src="/images/cart.png"></img></button>
+			<input name="id" type="hidden" th:value="${productModel.id}" /> 
+			<input name="id" type="hidden" th:value="${userModel.id}" /> 
+			<button class="icon" th:formaction="@{/add-product-to-cart}"><img src="/images/cart.png"></img></button>
 		</form>
 		
 		

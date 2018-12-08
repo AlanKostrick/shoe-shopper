@@ -8,7 +8,7 @@
 				    	<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
 				 </form>
 	 		</li>
-			<button><a href="/items">Home</a></button>
+			<button><a href="/products">Home</a></button>
 			<a href="/cart"><img id="shoppingcart" src="/images/shoppingcart.jpg"></img></a>
          	<button sec:authorize="hasRole('ROLE_ADMIN')" id='button'>Add</button>
 		</ul>

@@ -13,25 +13,58 @@ public class CartItem {
 	private long id;
 
 	@ManyToOne
-	private Item item;
+	private Product product;
 
-	public CartItem() {
-
-	}
-
-	public CartItem(Item item) {
-		this.item = item;
-	}
+	@ManyToOne
+	private User user;
 
 	public long getId() {
 
 		return id;
 	}
 
-	public Item getItem() {
+	public Product getProduct() {
 
-		return item;
+		return product;
 	}
-	
+
+	public User getUser() {
+		return user;
+	}
+
+	public CartItem() {
+
+	}
+
+	public CartItem(Product product) {
+		this.product = product;
+	}
+
+	public CartItem(Product product, User user) {
+		this.product = product;
+		this.user = user;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CartItem other = (CartItem) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
 
 }

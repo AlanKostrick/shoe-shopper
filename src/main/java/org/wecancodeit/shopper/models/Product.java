@@ -1,45 +1,55 @@
 package org.wecancodeit.shopper.models;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Item {
+public class Product {
 
-	private String itemName;
+	private String productName;
 	private String imageUrl;
 	
 	@Lob
-	private String itemDescription;
+	private String productDescription;
 
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	@OneToMany(mappedBy="product")
+	private Collection<CartItem> cartItems;
 
-	public String getItemName() {
-		return itemName;
+	public String getProductName() {
+		return productName;
 	}
 
 	public String getImageUrl() {
 		return imageUrl;
 	}
 
-	public String getItemDescription() {
-		return itemDescription;
+	public String getProductDescription() {
+		return productDescription;
 	}
 
 	public long getId() {
 		return id;
 	}
+	
+	public Collection<CartItem> getCartItems(){
+		return cartItems;
+	}
 
-	protected Item() {
+	protected Product() {
 	};
 
-	public Item(String itemName, String itemDescription, String imageUrl) {
-		this.itemName = itemName;
-		this.itemDescription = itemDescription;
+	public Product(String productName, String productDescription, String imageUrl) {
+		this.productName = productName;
+		this.productDescription = productDescription;
 		this.imageUrl = imageUrl;
 	}
 
@@ -59,7 +69,7 @@ public class Item {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Item other = (Item) obj;
+		Product other = (Product) obj;
 		if (id != other.id)
 			return false;
 		return true;

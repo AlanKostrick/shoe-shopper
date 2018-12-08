@@ -1,5 +1,6 @@
 package org.wecancodeit.shopper.controllers;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -9,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wecancodeit.shopper.models.CartItem;
-import org.wecancodeit.shopper.models.Item;
+import org.wecancodeit.shopper.models.CartNotFoundException;
+import org.wecancodeit.shopper.models.Product;
+import org.wecancodeit.shopper.models.User;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
-import org.wecancodeit.shopper.repositories.ItemRepository;
+import org.wecancodeit.shopper.repositories.ProductRepository;
+import org.wecancodeit.shopper.repositories.UserRepository;
 
 @Controller
 public class CartItemController {
@@ -20,42 +24,63 @@ public class CartItemController {
 	private CartItemRepository cartItemRepo;
 
 	@Resource
-	private ItemRepository itemRepo;
+	private ProductRepository productRepo;
+
+	@Resource
+	private UserRepository userRepo;
 
 	@RequestMapping("/cart")
-	public String findAllCartItems(Model model) {
-		model.addAttribute("cartItemsModel", cartItemRepo.findAll());
-		return "cart";
+	public String findAllCartItems(Model model, Principal principal) throws CartNotFoundException {
+
+		String loggedUser = principal.getName().toString();
+		Optional<User> foundUser = userRepo.findByUsername(loggedUser);
+
+		if (foundUser.isPresent()) {
+			model.addAttribute("cartItemsModel", cartItemRepo.findAll());
+			model.addAttribute("userModel", foundUser.get());
+			return "cart";
+		}
+		throw new CartNotFoundException();
 	}
 
-	@RequestMapping("/add-item-to-cart")
-	public String addItemsToCartFromItemPage(@RequestParam(value = "id") long itemId) {
+	@RequestMapping("/add-product-to-cart")
+	public String addItemsToCartFromProductPage(@RequestParam(value = "id") long productId, Principal principal,
+			Model model) {
 
-		Optional<Item> itemResult = itemRepo.findById(itemId);
-		Item item = itemResult.get();
-		CartItem lineItem;
+		String loggedUser = principal.getName().toString();
+		Optional<User> foundUser = userRepo.findByUsername(loggedUser);
 
-		Optional<CartItem> foundItem = cartItemRepo.findByItem(item);
+		User user;
 
-		if (foundItem.isPresent()) {
-			lineItem = foundItem.get();
-		} else {
-			lineItem = new CartItem(item);
+		if (foundUser.isPresent()) {
+			user = foundUser.get();
+			model.addAttribute("userModel", user);
+
+			Optional<Product> productResult = productRepo.findById(productId);
+			Product product = productResult.get();
+			CartItem lineItem;
+
+			Optional<CartItem> foundItem = cartItemRepo.findByProduct(product);
+
+			if (foundItem.isPresent()) {
+				lineItem = foundItem.get();
+			} else {
+				lineItem = new CartItem(product, user);
+			}
+			cartItemRepo.save(lineItem);
 		}
-
-		cartItemRepo.save(lineItem);
 
 		return "redirect:/cart";
 	}
 
 	@RequestMapping("/delete-all")
-	public String deleteAllItems() {
+	public String deleteAllProducts() {
 		cartItemRepo.deleteAll();
 		return "redirect:/cart";
 	}
-	
+
 	@RequestMapping("/place-order")
-	public String orderItems() {
+	public String orderProducts() {
 		cartItemRepo.deleteAll();
 		return "redirect:/cart";
 	}

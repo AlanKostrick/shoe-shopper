@@ -7,6 +7,7 @@ import org.wecancodeit.shopper.models.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 
-	Optional<User> findByUsername(String username);
+
+	Optional<User> findByUsername(String name);
 
 }
