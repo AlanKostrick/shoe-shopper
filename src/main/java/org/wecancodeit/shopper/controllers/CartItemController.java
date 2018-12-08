@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.wecancodeit.shopper.models.CartItem;
+import org.wecancodeit.shopper.models.CartNotFoundException;
 import org.wecancodeit.shopper.models.Product;
 import org.wecancodeit.shopper.models.User;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
@@ -29,17 +30,17 @@ public class CartItemController {
 	private UserRepository userRepo;
 
 	@RequestMapping("/cart")
-	public String findAllCartItems(Model model, Principal principal) {
-		
+	public String findAllCartItems(Model model, Principal principal) throws CartNotFoundException {
+
 		String loggedUser = principal.getName().toString();
 		Optional<User> foundUser = userRepo.findByUsername(loggedUser);
-		
-		if(foundUser.isPresent()) {
-		model.addAttribute("cartItemsModel", cartItemRepo.findAll());
-		model.addAttribute("userModel",foundUser.get());
-		return "cart";
+
+		if (foundUser.isPresent()) {
+			model.addAttribute("cartItemsModel", cartItemRepo.findAll());
+			model.addAttribute("userModel", foundUser.get());
+			return "cart";
 		}
-		return null;
+		throw new CartNotFoundException();
 	}
 
 	@RequestMapping("/add-product-to-cart")
@@ -48,7 +49,6 @@ public class CartItemController {
 
 		String loggedUser = principal.getName().toString();
 		Optional<User> foundUser = userRepo.findByUsername(loggedUser);
-		//long userId = foundUser.get().getId();
 
 		User user;
 

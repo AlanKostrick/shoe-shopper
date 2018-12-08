@@ -20,14 +20,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
 import org.wecancodeit.shopper.controllers.ImageUploadService;
-import org.wecancodeit.shopper.controllers.ItemController;
+import org.wecancodeit.shopper.controllers.ProductController;
 import org.wecancodeit.shopper.models.Product;
-import org.wecancodeit.shopper.repositories.ItemRepository;
+import org.wecancodeit.shopper.repositories.ProductRepository;
 import org.wecancodeit.shopper.repositories.UserRepository;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(ItemController.class)
-public class ItemControllerMockMvcTest {
+@WebMvcTest(ProductController.class)
+public class ProductControllerMockMvcTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -36,7 +36,7 @@ public class ItemControllerMockMvcTest {
 	private ImageUploadService imageUploadService;
 
 	@MockBean
-	private ItemRepository itemRepo;
+	private ProductRepository productRepo;
 
 	@MockBean
 	private UserRepository userRepo;
@@ -54,26 +54,26 @@ public class ItemControllerMockMvcTest {
 
 	@Test
 	public void shouldReturnStatusOfOkForSingleItemPage() throws Exception {
-		when(itemRepo.findById(itemOneId)).thenReturn(Optional.of(itemOne));
-		this.mockMvc.perform(get("/item?id=1")).andExpect(status().isFound());
+		when(productRepo.findById(itemOneId)).thenReturn(Optional.of(itemOne));
+		this.mockMvc.perform(get("/product?id=1")).andExpect(status().isFound());
 	}
 
 	@Test
 	public void shouldRouteToSinglePageView() throws Exception {
-		when(itemRepo.findById(itemOneId)).thenReturn(Optional.of(itemOne));
-		this.mockMvc.perform(get("/item?id=1")).andExpect(view().name(is("item")));
+		when(productRepo.findById(itemOneId)).thenReturn(Optional.of(itemOne));
+		this.mockMvc.perform(get("/product?id=1")).andExpect(view().name(is("product")));
 	}
 
 	@Test
 	public void shouldReturnStatusOfOkForAllItemsPage() throws Exception {
-		when(itemRepo.findAll()).thenReturn(Arrays.asList(itemOne, itemTwo));
-		this.mockMvc.perform(get("/items")).andExpect(status().isFound());
+		when(productRepo.findAll()).thenReturn(Arrays.asList(itemOne, itemTwo));
+		this.mockMvc.perform(get("/products")).andExpect(status().isFound());
 	}
 
 	@Test
 	public void shouldRouteToAllPageView() throws Exception {
-		when(itemRepo.findAll()).thenReturn(Arrays.asList(itemOne, itemTwo));
-		this.mockMvc.perform(get("/items")).andExpect(view().name(is("items")));
+		when(productRepo.findAll()).thenReturn(Arrays.asList(itemOne, itemTwo));
+		this.mockMvc.perform(get("/products")).andExpect(view().name(is("items")));
 	}
 
 }
