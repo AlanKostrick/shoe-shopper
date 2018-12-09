@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.wecancodeit.shopper.models.Product;
 import org.wecancodeit.shopper.models.ProductNotFoundException;
 import org.wecancodeit.shopper.models.User;
+import org.wecancodeit.shopper.models.UserNotFoundException;
 import org.wecancodeit.shopper.repositories.ProductRepository;
 import org.wecancodeit.shopper.repositories.UserRepository;
 
@@ -46,19 +47,36 @@ public class ProductController {
 
 	@RequestMapping("/product")
 	public String findOneItem(@RequestParam(value = "id") long productId, Principal principal, Model model)
-			throws ProductNotFoundException {
+			throws ProductNotFoundException, UserNotFoundException {
 
 		String loggedUser = principal.getName().toString();
 		Optional<User> foundUser = userRepo.findByUsername(loggedUser);
+
+		if (foundUser.isPresent()) {
+			Optional<Product> foundProduct = productRepo.findById(productId);
+
+			if (foundProduct.isPresent()) {
+				model.addAttribute("productModel", foundProduct.get());
+				model.addAttribute("userModel", foundUser.get());
+				return "product";
+			}
+			throw new ProductNotFoundException();
+		}
+		throw new UserNotFoundException();
+	}
+
+	
+	//for testing purposes only, to pull one item
+	public String findOneItem(@RequestParam(value = "id") long productId, Model model) throws ProductNotFoundException {
 
 		Optional<Product> foundProduct = productRepo.findById(productId);
 
 		if (foundProduct.isPresent()) {
 			model.addAttribute("productModel", foundProduct.get());
-			model.addAttribute("userModel", foundUser.get());
 			return "product";
 		}
 		throw new ProductNotFoundException();
+
 	}
 
 	@RequestMapping("/")

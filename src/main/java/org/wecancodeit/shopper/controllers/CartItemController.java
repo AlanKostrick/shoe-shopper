@@ -43,6 +43,13 @@ public class CartItemController {
 		throw new CartNotFoundException();
 	}
 
+	//for testing purposes only to pull all cart items
+	public String findAllCartItems(Model model) throws CartNotFoundException {
+		model.addAttribute("cartItemsModel", cartItemRepo.findAll());
+		return "cart";
+
+	}
+
 	@RequestMapping("/add-product-to-cart")
 	public String addItemsToCartFromProductPage(@RequestParam(value = "id") long productId, Principal principal,
 			Model model) {

@@ -1,8 +1,9 @@
 package org.wecancodeit.shopper;
 
-import static org.hamcrest.CoreMatchers.is;
+
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -38,10 +39,10 @@ public class JPAMappingsTest {
 	@Resource
 	private UserRepository userRepo;
 
-	/*@Test
+	@Test
 	public void shouldSaveAndLoadAnProduct() {
 
-		Product product = new Product("item one", "", "image url");
+		Product product = new Product("product one", "", "product url");
 		productRepo.save(product);
 		long productId = product.getId();
 
@@ -50,7 +51,7 @@ public class JPAMappingsTest {
 
 		Optional<Product> result = productRepo.findById(productId);
 		product = result.get();
-		assertThat(product.getProductName(), is("item one"));
+		assertThat(product.getProductName(), is("product one"));
 	}
 
 	@Test
@@ -66,7 +67,7 @@ public class JPAMappingsTest {
 
 	@Test
 	public void shouldSaveAndLoadAProductToTheCart() {
-		Product product = new Product("Item Name", "", "");
+		Product product = new Product("product name", "", "");
 		productRepo.save(product);
 
 		CartItem cart = new CartItem(product);
@@ -80,7 +81,7 @@ public class JPAMappingsTest {
 		Optional<CartItem> result = cartRepo.findById(cartId);
 		cart = result.get();
 
-		assertThat(cart.getProduct().getProductName(), is("Item Name"));
+		assertThat(cart.getProduct().getProductName(), is("product name"));
 		assertTrue(result.isPresent());
 	}
 	
@@ -102,7 +103,7 @@ public class JPAMappingsTest {
 		Optional<CartItem> result = cartRepo.findById(cartId);
 		cart = result.get();
 
-		assertThat(cart.getProduct().getProductName(), is("Item Name"));
+		assertThat(cart.getProduct().getProductName(), is("product 1"));
 		assertTrue(result.isPresent());
 	}
 
@@ -121,7 +122,7 @@ public class JPAMappingsTest {
 
 		assertThat(adminUser.getUsername(), is("admin"));
 		assertTrue(result.isPresent());
-	}*/
+	}
 	
 	@Test
 	public void shouldContainCartItemsForUser() {

@@ -1,6 +1,5 @@
 package org.wecancodeit.shopper;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,17 +10,19 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.ui.Model;
 import org.wecancodeit.shopper.controllers.CartItemController;
 import org.wecancodeit.shopper.models.CartItem;
 import org.wecancodeit.shopper.models.CartNotFoundException;
-import org.wecancodeit.shopper.models.Product;
+import org.wecancodeit.shopper.models.User;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
 import org.wecancodeit.shopper.repositories.ProductRepository;
+import org.wecancodeit.shopper.repositories.UserRepository;
 
 public class CartItemControllerTest {
 
@@ -41,6 +42,9 @@ public class CartItemControllerTest {
 	private ProductRepository productRepo;
 
 	@Mock
+	private UserRepository userRepo;
+
+	@Mock
 	private Model model;
 
 	@Mock
@@ -53,9 +57,11 @@ public class CartItemControllerTest {
 
 	@Test
 	public void shouldAddCartItemsToModel() throws CartNotFoundException {
+		User user = new User("admin", "admin", "ADMIN");
+		when(userRepo.findByUsername("admin")).thenReturn(Optional.of(user));
 		Collection<CartItem> cartItems = Arrays.asList(cartItemOne, cartItemTwo);
 		when(cartItemRepo.findAll()).thenReturn(cartItems);
-		underTest.findAllCartItems(model, principal);
+		underTest.findAllCartItems(model);
 		verify(model).addAttribute("cartItemsModel", cartItems);
 	}
 

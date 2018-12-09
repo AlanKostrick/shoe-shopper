@@ -54,7 +54,7 @@ public class AuthenticationIntegrationTest {
 		
 		Assert.assertNotNull(servletContext);
 	    Assert.assertTrue(servletContext instanceof MockServletContext);
-	    Assert.assertNotNull(webApplicationContext.getBean("itemController"));
+	    Assert.assertNotNull(webApplicationContext.getBean("productController"));
 	    Assert.assertNotNull(webApplicationContext.getBean("cartItemController"));
 	}
 	
@@ -95,7 +95,7 @@ public class AuthenticationIntegrationTest {
 		MockHttpSession session = (MockHttpSession) mvcResult.getRequest().getSession(false);
 		
 		// Ensure all routes defined in MvcConfig.java are working correctly
-		mvc.perform(get("/").session(session)).andDo(print()).andExpect(view().name("items"));
+		mvc.perform(get("/").session(session)).andDo(print()).andExpect(view().name("products"));
 		mvc.perform(get("/login").session(session)).andDo(print()).andExpect(view().name("login"));
 		
 		// Ensure the authenticated admin can now log out
