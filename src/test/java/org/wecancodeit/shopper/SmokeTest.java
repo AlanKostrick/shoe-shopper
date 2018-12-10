@@ -13,6 +13,7 @@ import org.wecancodeit.shopper.controllers.ImageUploadService;
 import org.wecancodeit.shopper.controllers.ProductController;
 import org.wecancodeit.shopper.repositories.CartItemRepository;
 import org.wecancodeit.shopper.repositories.ProductRepository;
+import org.wecancodeit.shopper.repositories.UserRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,6 +33,9 @@ public class SmokeTest {
 
 	@Resource
 	private ImageUploadService imageUploadService;
+	
+	@Resource
+	private UserRepository userRepo;
 
 	@Test
 	public void contextLoads() throws Exception {
@@ -40,6 +44,7 @@ public class SmokeTest {
 		assertThat(cartItemRepo).isNotNull();
 		assertThat(cartItemController).isNotNull();
 		assertThat(imageUploadService).isNotNull();
+		assertThat(userRepo).isNotNull();
 
 	}
 

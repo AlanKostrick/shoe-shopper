@@ -65,8 +65,7 @@ public class ProductController {
 		throw new UserNotFoundException();
 	}
 
-	
-	//for testing purposes only, to pull one item
+	// for testing purposes only, to pull one item
 	public String findOneItem(@RequestParam(value = "id") long productId, Model model) throws ProductNotFoundException {
 
 		Optional<Product> foundProduct = productRepo.findById(productId);
@@ -101,6 +100,13 @@ public class ProductController {
 		System.out.println(productName);
 		productRepo.save(new Product(productName, productDescription, "/uploads/" + virtualFileUrl));
 
+		return "redirect:/products";
+	}
+
+	public String addItem(@RequestParam(value = "productName", required = true) String productName,
+			@RequestParam(value = "productDescription", required = true) String productDescription) {
+
+		productRepo.save(new Product(productName, productDescription, "/uploads/" + ""));
 		return "redirect:/products";
 	}
 

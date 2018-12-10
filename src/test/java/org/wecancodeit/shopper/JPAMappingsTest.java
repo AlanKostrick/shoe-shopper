@@ -40,7 +40,7 @@ public class JPAMappingsTest {
 	private UserRepository userRepo;
 
 	@Test
-	public void shouldSaveAndLoadAnProduct() {
+	public void shouldSaveAndLoadAProduct() {
 
 		Product product = new Product("product one", "", "product url");
 		productRepo.save(product);
