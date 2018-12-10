@@ -13,3 +13,9 @@ An application that demonstrates Spring's basic authentication/authorization cap
 ## Instructions for use 
 
 Navigate to `localhost:8080/` and the login info will be either `admin` , `admin` or `user` , `user`. Logging in as `admin` will allow access to an `add` button to add more products to the database. 
+
+### ToDos
+
+- Slider of images for each product
+- Quantity/Totals using BigDecimal 
+- Shoe size selectors 
