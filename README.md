@@ -1,6 +1,6 @@
 # Welcome to Shoe Shopper
 
-An application that demonstrates Spring's basic authentication/authorization capabilities. This app creates products that can be sent to a shopping cart. The shopping cart will uniquely store each user's cart until they are ready to checkout or clear their contents. 
+An application that demonstrates Spring's basic authentication/authorization capabilities. This app creates products that can be sent to a shopping cart. The shopping cart will uniquely store each user's cart until they are ready to checkout or clear their contents.  
 
 ## The following technologies are demonstrated in this app 
 
