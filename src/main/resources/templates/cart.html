@@ -14,7 +14,13 @@
 
   		<div class="items" th:each="cartItem: ${userModel.cartItems}">
   		 	<ul>
-      			<li><a th:href ="@{/product(id=${cartItem.product.id})}" th:text = "${cartItem.product.productName}"></a></li>
+      			<li><a th:href ="@{/product(id=${cartItem.product.id})}" th:text = "${cartItem.product.productName}"></a>
+      				<form class= "delete" method="Post">
+      					<input name="userId" type="hidden" th:value="${userModel.id}" /> 
+      					<input name="productId" type="hidden" th:value="${cartItem.product.id}"/>
+      					<button id="x"  th:formaction="@{/remove-button}">&times;</button>
+      				</form>
+      			</li>
     		</ul> 
   		</div>
   		

@@ -18,8 +18,8 @@
 		</div>
 		
 		<form class= "add" method="Post">
-			<input name="id" type="hidden" th:value="${productModel.id}" /> 
-			<input name="id" type="hidden" th:value="${userModel.id}" /> 
+			<input name="productId" type="hidden" th:value="${productModel.id}" /> 
+			<input name="userId" type="hidden" th:value="${userModel.id}" /> 
 			<button class="icon" th:formaction="@{/add-product-to-cart}"><img src="/images/cart.png"></img></button>
 		</form>
 		
