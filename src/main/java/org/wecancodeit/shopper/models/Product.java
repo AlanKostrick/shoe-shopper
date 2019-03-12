@@ -13,15 +13,15 @@ public class Product {
 
 	private String productName;
 	private String imageUrl;
-	
+
 	@Lob
 	private String productDescription;
 
 	@Id
 	@GeneratedValue
 	private long id;
-	
-	@OneToMany(mappedBy="product")
+
+	@OneToMany(mappedBy = "product")
 	private Collection<CartItem> cartItems;
 
 	public String getProductName() {
@@ -39,13 +39,13 @@ public class Product {
 	public long getId() {
 		return id;
 	}
-	
-	public Collection<CartItem> getCartItems(){
+
+	public Collection<CartItem> getCartItems() {
 		return cartItems;
 	}
 
 	protected Product() {
-	};
+	}
 
 	public Product(String productName, String productDescription, String imageUrl) {
 		this.productName = productName;

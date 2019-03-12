@@ -202,3 +202,25 @@
 .footer{
 	padding-top: 4rem;
 }
+
+@media screen and (max-width: 600px){
+  .header{
+  	display: flex;
+  	flex-direction: column;
+  }
+  
+  .nav{
+  	display: flex;
+  	flex-direction: column;
+  }
+  
+  .nav li{
+  	padding: 1rem;
+  }
+  
+  .nav button{
+  	margin: 1rem;
+  }
+  
+}
+
