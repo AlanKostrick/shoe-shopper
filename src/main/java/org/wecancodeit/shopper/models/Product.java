@@ -31,7 +31,7 @@ public class Product {
 	public String getImageUrl() {
 		return imageUrl;
 	}
-
+ 
 	public String getProductDescription() {
 		return productDescription;
 	}

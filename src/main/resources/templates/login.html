@@ -15,10 +15,10 @@
 			<header th:replace="layouts/header :: header"></header>
 	    	<section id="login">
 		        <div class="formText" th:if="${param.error}">
-		            Invalid username and password.
+		            <p>Invalid username/password.</p>
 		        </div>
 		        <div class="formText" th:if="${param.logout}">
-		            You have been logged out.
+		            <p>You have been logged out.</p>
 		        </div>
 		        <form th:action="@{/login}" method="post">
 		            <div><input class="itemNameInput" type="text" placeholder="User Name" name="username"/></div>

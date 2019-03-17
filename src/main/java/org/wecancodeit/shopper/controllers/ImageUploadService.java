@@ -16,7 +16,7 @@ public class ImageUploadService {
 		// Determine where uploads should be saved
         String userHomeDirectory = System.getProperty("user.home");
         String uploadDirectory = Paths.get(userHomeDirectory, "spring-uploads").toString();
-        
+         
         // Create if needed
         new File(uploadDirectory).mkdirs();
         

@@ -8,9 +8,9 @@
 				    	<a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logout</a>
 				 </form>
 	 		</li>
-			<button><a href="/products">Home</a></button>
-			<a href="/cart"><img id="shoppingcart" src="/images/shoppingcart.jpg"></img></a>
-         	<button sec:authorize="hasRole('ROLE_ADMIN')" id='button'>Add</button>
+			<li><button><a href="/products">Home</a></button></li>
+			<li><a href="/cart"><img id="shoppingcart" src="/images/shoppingcart.jpg"></img></a></li>
+         	<li><button sec:authorize="hasRole('ROLE_ADMIN')" id='button'>Add</button></li>
 		</ul>
 	</nav>
 </header>

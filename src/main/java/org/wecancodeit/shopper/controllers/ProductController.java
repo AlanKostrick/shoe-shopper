@@ -44,7 +44,7 @@ public class ProductController {
 		// cartItemRepo.deleteAll();
 		return "login";
 	}
-
+ 
 	@RequestMapping("/product")
 	public String findOneItem(@RequestParam(value = "id") long productId, Principal principal, Model model)
 			throws ProductNotFoundException, UserNotFoundException {

@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled=true) // Enables @PreAuthorize, etc.
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-
+ 
 	
 	//Add this bean to deal for the UserDetails
 	@Bean
@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
 	 * ; }
 	 */
-    
+     
   
     
 }

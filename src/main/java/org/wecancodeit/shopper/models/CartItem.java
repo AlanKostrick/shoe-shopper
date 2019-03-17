@@ -19,12 +19,10 @@ public class CartItem {
 	private User user;
 
 	public long getId() {
-
 		return id;
 	}
 
 	public Product getProduct() {
-
 		return product;
 	}
 

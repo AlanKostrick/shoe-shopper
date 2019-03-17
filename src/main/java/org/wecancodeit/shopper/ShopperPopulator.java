@@ -14,7 +14,7 @@ public class ShopperPopulator implements CommandLineRunner {
 
 	@Resource
 	private UserRepository userRepo;
-
+ 
 	@Resource
 	private ProductRepository productRepo;
 
@@ -23,7 +23,7 @@ public class ShopperPopulator implements CommandLineRunner {
 
 		userRepo.save(new User("admin", "admin", "ADMIN"));
 		userRepo.save(new User("user", "user", "USER"));
-
+ 
 		Product nikeShoes = new Product("Nike",
 				"Skate ipsum dolor sit amet, Kevin Harris impossible Santa Monica Beach half-flip risers pool. Opposite footed blunt mini ramp 1080 John Lucero betty. Bank late mute-air Lester Kasai boned out frontside. Japan air Dustin Dollin slap maxwell air frontside bank. Lipslide skate or die death box feeble 540. Casper hang up slap maxwell slam blunt. Masonite Tod Swank skater lip steps snake. Airwalk slam bluntslide crail grab Rector goofy footed. Bunson over the Junson rail finger flip pump full pipe rocket air. Skate key hang-up indy grab freestyle tail Blind. Cab flip Jeremy Wray roll-in shoveit nose grab vert. Wade Speyer pogo melancholy griptape manual ollie north.",
 				"/images/nike.jpg");

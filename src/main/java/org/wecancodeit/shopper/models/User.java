@@ -23,10 +23,10 @@ public class User {
 	private String password;
 
 	private String role;
-
+ 
 	@OneToMany(mappedBy = "user")
 	private Collection<CartItem> cartItems;
-
+ 
 	public Long getId() {
 		return id;
 	}

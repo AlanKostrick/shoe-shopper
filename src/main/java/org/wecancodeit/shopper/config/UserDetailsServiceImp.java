@@ -18,7 +18,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+ 
 		// Get existing user from database
 		User user;
 		Optional<User> existingUser = userRepo.findByUsername(username);

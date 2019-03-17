@@ -25,7 +25,7 @@ public class CartItemController {
 
 	@Resource
 	private ProductRepository productRepo;
-
+ 
 	@Resource
 	private UserRepository userRepo;
 
@@ -94,12 +94,12 @@ public class CartItemController {
 		return "redirect:/cart";
 	}
 
-	@RequestMapping("/delete-all")
+	@RequestMapping("/delete-all") 
 	public String deleteAllProducts() {
 		cartItemRepo.deleteAll();
 		return "redirect:/cart";
 	}
-
+ 
 	@RequestMapping("/place-order")
 	public String orderProducts() {
 		cartItemRepo.deleteAll();
